@@ -1,4 +1,3 @@
-import random
 import drawBot as db
 
 holifonts = {}
@@ -6,16 +5,14 @@ for f in db.installedFonts():
     if "Holisticissimo" in f:
         _, suf = f.split("-")
         holifonts[suf] = f
-w, h = 200, 200
-fsize = 175
 
-for letter in "aehijlnuv":
-    for top, bottom in ["AA", "AB", "BA", "BB"]:
-        db.newDrawing()
+w, h = 200, 200
+
+def draw_sample(letter, top, bottom, drawline=True):
+
+    fsize = 175
+    with savedState():
         # draw background and settings
-        db.newPage(w, h)
-        db.fill(1)
-        db.rect(0, 0, w, h)
         db.fill(0)
         db.stroke(None)
         db.translate(0, 50)
@@ -53,11 +50,42 @@ for letter in "aehijlnuv":
             db.clipPath(bottom_clip)
             db.drawPath(bottom_path)  # so that DrawBot outlines the letter in SVG
         # draw line
-        db.stroke(1, 0, 0)
-        db.fill(None)
-        db.strokeWidth(1)
-        db.line((0, xh / 2), (w, xh / 2))
+        if drawline:
+            db.stroke(1, 0, 0)
+            db.fill(None)
+            db.strokeWidth(1)
+            db.line((0, xh / 2), (w, xh / 2))
+
+# draw samples
+for letter in "aehijlnuv":
+    for top, bottom in ["AA", "AB", "BA", "BB"]:
+        db.newDrawing()
+        db.newPage(w, h)
+        db.fill(1)
+        db.rect(0, 0, w, h)
+        draw_sample(letter, top, bottom)
         samplename = "%s_%s%s" % (letter, top, bottom)
         db.saveImage("SVGs/%s.svg" % samplename)
-        db.saveImage("PDFs/%s.pdf" % samplename)
+        # db.saveImage("PDFs/%s.pdf" % samplename)
         db.endDrawing()
+
+# draw maks
+db.newDrawing()
+db.newPage(w, h)
+db.fill(1)
+db.rect(0, 0, w, h)
+for letter in "aehijlnuv":
+    for top, bottom in ["AA", "AB", "BA", "BB"]:
+
+        draw_sample(letter, top, bottom, drawline=False)
+db.saveImage("SVGs/mask.svg")
+# db.saveImage("PDFs/mask.pdf")
+db.endDrawing()
+
+db.newDrawing()
+db.newPage(w, h)
+db.fill(1)
+db.rect(0, 0, w, h)
+db.saveImage("SVGs/empty.svg")
+# db.saveImage("PDFs/empty.pdf")
+db.endDrawing()

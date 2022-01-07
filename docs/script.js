@@ -32,11 +32,13 @@ function getIndexes(count, total) {
 // available combinations: AA, AB, BA, BB
 
 form_url = "https://getform.io/f/eb496034-9170-4c5f-a86a-703fb9005800"
+maskpath = "samples/SVGs/mask.svg"
+emptypath = "samples/SVGs/empty.svg"
 practice_samples = [
 	["a_AA", "a_BB"],
-	["j_BB", "j_BB"],
-	["h_BB", "h_AA"],
-	["n_AB", "n_AB"],
+	["v_BB", "v_BA"],
+	["h_AB", "h_AA"],
+	["l_AB", "l_BB"],
 	["i_BA", "i_BA"],
 ]
 main_samples = [
@@ -66,20 +68,26 @@ shuffle(main_samples)
 // add a series of trials for the practice
 fs = $("#practice")
 practice_samples.forEach(function (tuple, index, array) {
+	shuffle(tuple)
 	sample1 = tuple[0]
 	sample2 = tuple[1]
 	trialID =  "practice_" + (index + 1)
 	// create fieldset for a word
-	fs.after('<fieldset class="trial" id="fs_' + trialID + '"><h2>Practice: do these look alike?</h2></fieldset>')
+	fs.after('<fieldset class="trial" id="fs_' + trialID + '"><h2>Practice: do the top halfs of these look identical?</h2></fieldset>')
 	fs = $("#fs_" + trialID)
-	wordSVGURL1 = "samples/SVGs/" + sample1 + ".svg"
-	wordSVGURL2 = "samples/SVGs/" + sample2 + ".svg"
+	samplepath1 = "samples/SVGs/" + sample1 + ".svg"
+	samplepath2 = "samples/SVGs/" + sample2 + ".svg"
 	fs.append('<div class="trialarea">' +
-				'<div class="sample"><img src="' +  wordSVGURL1 + '" alt=""><img src="' +  wordSVGURL2 + '" alt=""></div>' +
-				'<input type="button" class="next button" value="Sure same">' +
-				'<input type="button" class="next button" value="Probably same">' +
-				'<input type="button" class="next button" value="Probably different">' +
-				'<input type="button" class="next button right" value="Sure different">' +
+				'<div class="sample">' +
+				'  <img src="' +  samplepath1 + '" class="first">' +
+				'  <img src="' + maskpath + '" class="second">' +
+				'  <img src="' +  samplepath2 + '" class="third">' +
+				'  <img src="' +  emptypath + '" class="last last">' +
+				'</div>' +
+				'<input type="button" class="next button last" value="Sure same">' +
+				'<input type="button" class="next button last" value="Probably same">' +
+				'<input type="button" class="next button last" value="Probably different">' +
+				'<input type="button" class="next button last right" value="Sure different">' +
 				'</div>')
 
 	// this record will contain: typeface, sample, response, miliseconds
@@ -93,20 +101,26 @@ practice_samples.forEach(function (tuple, index, array) {
 // add a series of trials for the main part
 fs = $("#main")
 main_samples.forEach(function (tuple, index, array) {
+	shuffle(tuple)
 	sample1 = tuple[0]
 	sample2 = tuple[1]
 	trialID =  "main_" + (index + 1)
 	// create fieldset for a word
-	fs.after('<fieldset class="trial" id="fs_' + trialID + '"><h2>Main: do the top halfs of these look alike?</h2></fieldset>')
+	fs.after('<fieldset class="trial" id="fs_' + trialID + '"><h2>Main: do the top halfs of these look identical?</h2></fieldset>')
 	fs = $("#fs_" + trialID)
-	wordSVGURL1 = "samples/SVGs/" + sample1 + ".svg"
-	wordSVGURL2 = "samples/SVGs/" + sample2 + ".svg"
+	samplepath1 = "samples/SVGs/" + sample1 + ".svg"
+	samplepath2 = "samples/SVGs/" + sample2 + ".svg"
 	fs.append('<div class="trialarea">' +
-				'<div class="sample"><img src="' +  wordSVGURL1 + '" alt=""><img src="' +  wordSVGURL2 + '" alt=""></div>' +
-				'<input type="button" class="next button" value="Sure same">' +
-				'<input type="button" class="next button" value="Probably same">' +
-				'<input type="button" class="next button" value="Probably different">' +
-				'<input type="button" class="next button right" value="Sure different">' +
+				'<div class="sample">' +
+				'  <img src="' +  samplepath1 + '" class="first">' +
+				'  <img src="' + maskpath + '" class="second">' +
+				'  <img src="' +  samplepath2 + '" class="third">' +
+				'  <img src="' +  emptypath + '" class="last last">' +
+				'</div>' +
+				'<input type="button" class="next button last" value="Sure same">' +
+				'<input type="button" class="next button last" value="Probably same">' +
+				'<input type="button" class="next button last" value="Probably different">' +
+				'<input type="button" class="next button last right" value="Sure different">' +
 				'</div>')
 
 	// this record will contain: typeface, sample, response, miliseconds

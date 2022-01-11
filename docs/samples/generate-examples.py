@@ -57,17 +57,17 @@ def draw_sample(letter, top, bottom, drawline=True):
             db.line((0, xh / 2), (w, xh / 2))
 
 # draw samples
-for letter in "aehijlnuv":
-    for top, bottom in ["AA", "AB", "BA", "BB"]:
-        db.newDrawing()
-        db.newPage(w, h)
-        db.fill(1)
-        db.rect(0, 0, w, h)
-        draw_sample(letter, top, bottom)
-        samplename = "%s_%s%s" % (letter, top, bottom)
-        db.saveImage("SVGs/%s.svg" % samplename)
-        # db.saveImage("PDFs/%s.pdf" % samplename)
-        db.endDrawing()
+# for letter in "aehijlnuv":
+#     for top, bottom in ["AA", "AB", "BA", "BB"]:
+#         db.newDrawing()
+#         db.newPage(w, h)
+#         db.fill(1)
+#         db.rect(0, 0, w, h)
+#         draw_sample(letter, top, bottom)
+#         samplename = "%s_%s%s" % (letter, top, bottom)
+#         db.saveImage("SVGs/%s.svg" % samplename)
+#         # db.saveImage("PDFs/%s.pdf" % samplename)
+#         db.endDrawing()
 
 # draw mask
 db.newDrawing()
@@ -75,7 +75,7 @@ db.newPage(w, h)
 db.fill(1)
 db.rect(0, 0, w, h)
 db.stroke(0)
-db.strokeWidth(1)
+db.strokeWidth(2)
 db.fill(None)
 rows = 20
 bit = w / (rows + 1) / 2
@@ -83,21 +83,24 @@ for y in range(0, rows):
     with db.savedState():
         db.translate(2 * bit, 2 * bit * (y + 1))
         for x in range(0, rows):
-            db.line((-bit + 1, 0), (bit - 1, 0))
-            db.line((0, -bit + 1), (0, bit - 1))
-            db.translate(2 * bit, 0)
+            with db.savedState():
+                db.translate(2 * bit * x, 0)
+                db.rotate(randint(0, 90))
+                db.line((-bit + 1, 0), (bit - 1, 0))
+                db.line((0, -bit + 1), (0, bit - 1))
 
 db.stroke(None)
 db.fill(1, 0, 0)
+bit *= 1.5
 db.oval((w - bit) / 2, (h - bit) / 2, bit, bit)
         
 db.saveImage("SVGs/mask.svg")
 db.endDrawing()
 
-db.newDrawing()
-db.newPage(w, h)
-db.fill(1)
-db.rect(0, 0, w, h)
-db.saveImage("SVGs/empty.svg")
-# db.saveImage("PDFs/empty.pdf")
-db.endDrawing()
+# db.newDrawing()
+# db.newPage(w, h)
+# db.fill(1)
+# db.rect(0, 0, w, h)
+# db.saveImage("SVGs/empty.svg")
+# # db.saveImage("PDFs/empty.pdf")
+# db.endDrawing()

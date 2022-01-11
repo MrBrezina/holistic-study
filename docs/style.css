@@ -224,12 +224,12 @@ label.error {
 }
 
 .third {
-	animation: cssAnimation 0s 1s forwards;
+	animation: cssAnimation 0s 1.5s forwards;
 	visibility: hidden;
 }
 
 .last {
-	animation: cssAnimation 0s 1.5s forwards;
+	animation: cssAnimation 0s 2s forwards;
 	visibility: hidden;
 }
 

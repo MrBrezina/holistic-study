@@ -39,6 +39,8 @@ combos = [
 		// wholly same
 		["_AA", "_AA"],
 		["_BB", "_BB"],
+		["_AB", "_AB"],
+		["_BA", "_BA"],
 		// top same, bottom different
 		["_AA", "_AB"],
 		["_BB", "_BA"],
@@ -58,7 +60,7 @@ emptypath = "samples/SVGs/empty.svg"
 // needs combos shuffled, so the association with letters is random
 practice_samples = []
 combos.forEach(function (tuple, index, array) {
-	letter = letters[index]  // doesn’t overflow as there are fewer combos than letters
+	letter = letters[index % letters.length]  // prevent overflow
 	pair = [letter + tuple[0], letter + tuple[1]]
 	practice_samples.push(pair)
 })

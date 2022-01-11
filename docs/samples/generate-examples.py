@@ -75,9 +75,9 @@ db.newPage(w, h)
 db.fill(1)
 db.rect(0, 0, w, h)
 db.stroke(0)
-db.strokeWidth(2)
+db.strokeWidth(3)
 db.fill(None)
-rows = 20
+rows = 16
 bit = w / (rows + 1) / 2
 for y in range(0, rows):
     with db.savedState():

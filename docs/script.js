@@ -1,13 +1,17 @@
 // functions
 // shuffle an array in place
-function shuffle(a) {
-	var j, x, i
-	for (i = a.length; i; i -= 1) {
-		j = Math.floor(Math.random() * i)
-		x = a[i - 1]
-		a[i - 1] = a[j]
-		a[j] = x
+// Fisher-Yates (aka Knuth) Shuffle
+function shuffle(array) {
+	let currentIndex = array.length,  randomIndex;
+	// while there remain elements to shuffle
+	while (currentIndex != 0) {
+		// pick a remaining element
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex--;
+		// swap it with the current element.
+		[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
 	}
+	return array;
 }
 
 // get a list of random, unique indexes
@@ -30,27 +34,44 @@ function getIndexes(count, total) {
 
 // available letters: aehijlnuv
 // available combinations: AA, AB, BA, BB
-
+letters = ["a", "e", "h", "i", "j", "l", "n", "u", "v"]
+combos = [
+		// wholly same
+		["_AA", "_AA"],
+		["_BB", "_BB"],
+		// top same, bottom different
+		["_AA", "_AB"],
+		["_BB", "_BA"],
+		// top different, bottom same
+		["_AA", "_BA"],
+		["_BB", "_AB"],
+		// wholly different
+		["_AB", "_BA"],
+		["_AA", "_BB"],
+]
+shuffle(combos)
 form_url = "https://getform.io/f/eb496034-9170-4c5f-a86a-703fb9005800"
 maskpath = "samples/SVGs/mask.svg"
 emptypath = "samples/SVGs/empty.svg"
-practice_samples = [
-	["a_AA", "a_BB"],
-	["v_BB", "v_BA"],
-	["h_AB", "h_AA"],
-	["l_AB", "l_BB"],
-	["i_BA", "i_BA"],
-]
-main_samples = [
-	["a_AA", "a_BB"],
-	["j_BB", "j_BB"],
-	["h_BB", "h_AA"],
-	["n_AA", "n_BA"],
-	["e_AA", "e_AB"],
-	["u_BA", "u_BB"],
-	["e_BA", "e_AA"],
-	["n_AA", "n_AA"],
-]
+
+// for each combo, one letter
+// needs combos shuffled, so the association with letters is random
+practice_samples = []
+combos.forEach(function (tuple, index, array) {
+	letter = letters[index]  // doesn’t overflow as there are fewer combos than letters
+	pair = [letter + tuple[0], letter + tuple[1]]
+	practice_samples.push(pair)
+})
+
+// all combos for each letter
+main_samples = []
+letters.forEach(function (letter, index1, array1) {
+	combos.forEach(function (tuple, index2, array2) {
+		pair = [letter + tuple[0], letter + tuple[1]]
+		main_samples.push(pair)
+	})
+})
+
 
 var counter = 0
 var total_trials = practice_samples.length + main_samples.length

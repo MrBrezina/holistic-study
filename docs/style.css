@@ -188,8 +188,8 @@ label.error {
 	position: relative;
 	top: 0;
 	left: 0;
-	width: 400px;
-	height: 400px;
+	width: 200px;
+	height: 200px;
 	margin: 40px auto;
 }
 
@@ -197,8 +197,8 @@ label.error {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 400px;
-	height: 400px;
+	width: 200px;
+	height: 200px;
     border: 1px solid #ccc;
 	z-index: 2;
 }
@@ -219,17 +219,17 @@ label.error {
 /* Show samples one after the other */
 
 .second {
-	animation: cssAnimation 0s 1s forwards;
+	animation: cssAnimation 0s 0.5s forwards;
 	visibility: hidden;
 }
 
 .third {
-	animation: cssAnimation 0s 2s forwards;
+	animation: cssAnimation 0s 1s forwards;
 	visibility: hidden;
 }
 
 .last {
-	animation: cssAnimation 0s 3s forwards;
+	animation: cssAnimation 0s 1.5s forwards;
 	visibility: hidden;
 }
 

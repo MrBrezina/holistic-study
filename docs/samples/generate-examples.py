@@ -69,17 +69,29 @@ for letter in "aehijlnuv":
         # db.saveImage("PDFs/%s.pdf" % samplename)
         db.endDrawing()
 
-# draw maks
+# draw mask
 db.newDrawing()
 db.newPage(w, h)
 db.fill(1)
 db.rect(0, 0, w, h)
-for letter in "aehijlnuv":
-    for top, bottom in ["AA", "AB", "BA", "BB"]:
+db.stroke(0)
+db.strokeWidth(1)
+db.fill(None)
+rows = 20
+bit = w / (rows + 1) / 2
+for y in range(0, rows):
+    with db.savedState():
+        db.translate(2 * bit, 2 * bit * (y + 1))
+        for x in range(0, rows):
+            db.line((-bit + 1, 0), (bit - 1, 0))
+            db.line((0, -bit + 1), (0, bit - 1))
+            db.translate(2 * bit, 0)
 
-        draw_sample(letter, top, bottom, drawline=False)
+db.stroke(None)
+db.fill(1, 0, 0)
+db.oval((w - bit) / 2, (h - bit) / 2, bit, bit)
+        
 db.saveImage("SVGs/mask.svg")
-# db.saveImage("PDFs/mask.pdf")
 db.endDrawing()
 
 db.newDrawing()

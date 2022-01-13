@@ -36,12 +36,12 @@ function getIndexes(count, total) {
 // available combinations: AA, AB, BA, BB
 letters = ["a", "e", "h", "j", "n", "u"]
 combos = [
-	[[1, 1], [1, 1]],
-	[[1, 2], [1, 2]],
-	[[1, 2], [1, 3]],
-	[[1, 2], [3, 4]], // not [1, 2] [2, 3] to avoid confounding variable
-	[[1, 1], [2, 2]],
-	[[1, 2], [3, 2]],
+	[[0, 0], [0, 0]],
+	[[0, 1], [0, 1]],
+	[[0, 1], [0, 2]],
+	[[0, 1], [2, 3]], // not [0, 1] [1, 2] to avoid confounding variable
+	[[0, 0], [1, 1]],
+	[[0, 1], [2, 1]],
 ]
 shuffle(combos)
 form_url = "https://getform.io/f/eb496034-9170-4c5f-a86a-703fb9005800"

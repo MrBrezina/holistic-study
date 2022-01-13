@@ -57,17 +57,18 @@ def draw_sample(letter, top, bottom, drawline=True):
             db.line((0, xh / 2), (w, xh / 2))
 
 # draw samples
-# for letter in "aehijlnuv":
-#     for top, bottom in ["AA", "AB", "BA", "BB"]:
-#         db.newDrawing()
-#         db.newPage(w, h)
-#         db.fill(1)
-#         db.rect(0, 0, w, h)
-#         draw_sample(letter, top, bottom)
-#         samplename = "%s_%s%s" % (letter, top, bottom)
-#         db.saveImage("SVGs/%s.svg" % samplename)
-#         # db.saveImage("PDFs/%s.pdf" % samplename)
-#         db.endDrawing()
+for letter in "aehjnu": # not using ilv
+    for top in "ABCD":
+        for bottom in "ABCD":
+            db.newDrawing()
+            db.newPage(w, h)
+            db.fill(1)
+            db.rect(0, 0, w, h)
+            draw_sample(letter, top, bottom)
+            samplename = "%s_%s%s" % (letter, top, bottom)
+            db.saveImage("SVGs/%s.svg" % samplename)
+            # db.saveImage("PDFs/%s.pdf" % samplename)
+            db.endDrawing()
 
 # draw mask
 db.newDrawing()

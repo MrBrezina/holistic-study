@@ -34,22 +34,14 @@ function getIndexes(count, total) {
 
 // available letters: aehijlnuv
 // available combinations: AA, AB, BA, BB
-letters = ["a", "e", "h", "i", "j", "l", "n", "u", "v"]
+letters = ["a", "e", "h", "j", "n", "u"]
 combos = [
-		// wholly same
-		["_AA", "_AA"],
-		["_BB", "_BB"],
-		["_AB", "_AB"],
-		["_BA", "_BA"],
-		// top same, bottom different
-		["_AA", "_AB"],
-		["_BB", "_BA"],
-		// top different, bottom same
-		["_AA", "_BA"],
-		["_BB", "_AB"],
-		// wholly different
-		["_AB", "_BA"],
-		["_AA", "_BB"],
+	[[1, 1], [1, 1]],
+	[[1, 2], [1, 2]],
+	[[1, 2], [1, 3]],
+	[[1, 2], [3, 4]], // not [1, 2] [2, 3] to avoid confounding variable
+	[[1, 1], [2, 2]],
+	[[1, 2], [3, 2]],
 ]
 shuffle(combos)
 form_url = "https://getform.io/f/eb496034-9170-4c5f-a86a-703fb9005800"
@@ -59,21 +51,27 @@ emptypath = "samples/SVGs/empty.svg"
 // for each combo, one letter
 // needs combos shuffled, so the association with letters is random
 practice_samples = []
-combos.forEach(function (tuple, index, array) {
+map = "ABCD"  // used to select a representative variant for top/bottom of the letter
+combos.forEach(function (pair, index, array) {
+	shuffle(map)
 	letter = letters[index % letters.length]  // prevent overflow
-	pair = [letter + tuple[0], letter + tuple[1]]
-	practice_samples.push(pair)
+	sample_pair = [letter + "_" + map[pair[0][0]] + map[pair[0][1]], letter + "_" + map[pair[1][0]] + map[pair[1][1]]]
+	practice_samples.push(sample_pair)
 })
 
 // all combos for each letter
 main_samples = []
 letters.forEach(function (letter, index1, array1) {
-	combos.forEach(function (tuple, index2, array2) {
-		pair = [letter + tuple[0], letter + tuple[1]]
-		main_samples.push(pair)
+	combos.forEach(function (pair, index2, array2) {
+		shuffle(map)
+		sample_pair = [letter + "_" + map[pair[0][0]] + map[pair[0][1]], letter + "_" + map[pair[1][0]] + map[pair[1][1]]]
+		main_samples.push(sample_pair)
 	})
 })
 
+console.log(map)
+console.log(practice_samples)
+console.log(main_samples)
 
 var counter = 0
 var total_trials = practice_samples.length + main_samples.length

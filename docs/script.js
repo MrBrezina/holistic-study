@@ -32,8 +32,6 @@ function getIndexes(count, total) {
 // settings
 // - URL
 
-// available letters: aehijlnuv
-// available combinations: AA, AB, BA, BB
 letters = ["a", "e", "h", "j", "n", "u"]
 combos = [
 	[[0, 0], [0, 0]],

@@ -58,8 +58,8 @@ def draw_sample(letter, top, bottom, drawline=True):
 
 # draw samples
 for letter in "aehjnu": # not using ilv
-    for top in "ABCD":
-        for bottom in "ABCD":
+    for top in "ABCDE":
+        for bottom in "ABCDE":
             db.newDrawing()
             db.newPage(w, h)
             db.fill(1)

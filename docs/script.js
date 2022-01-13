@@ -51,7 +51,7 @@ emptypath = "samples/SVGs/empty.svg"
 // for each combo, one letter
 // needs combos shuffled, so the association with letters is random
 practice_samples = []
-map = "ABCD"  // used to select a representative variant for top/bottom of the letter
+var map = ["A", "B", "C", "D"]  // used to select a representative variant for top/bottom of the letter
 combos.forEach(function (pair, index, array) {
 	shuffle(map)
 	letter = letters[index % letters.length]  // prevent overflow
@@ -100,10 +100,11 @@ practice_samples.forEach(function (tuple, index, array) {
 	samplepath2 = "samples/SVGs/" + sample2 + ".svg"
 	fs.append('<div class="trialarea">' +
 				'<div class="sample">' +
+				'  <img src="' +  emptypath + '" class="initial">' +
 				'  <img src="' +  samplepath1 + '" class="first">' +
 				'  <img src="' + maskpath + '" class="second">' +
 				'  <img src="' +  samplepath2 + '" class="third">' +
-				'  <img src="' +  emptypath + '" class="last last">' +
+				'  <img src="' +  emptypath + '" class="last">' +
 				'</div>' +
 				'<input type="button" class="next button last" value="Sure same">' +
 				'<input type="button" class="next button last" value="Probably same">' +
@@ -133,6 +134,7 @@ main_samples.forEach(function (tuple, index, array) {
 	samplepath2 = "samples/SVGs/" + sample2 + ".svg"
 	fs.append('<div class="trialarea">' +
 				'<div class="sample">' +
+				'  <img src="' +  emptypath + '" class="initial">' +
 				'  <img src="' +  samplepath1 + '" class="first">' +
 				'  <img src="' + maskpath + '" class="second">' +
 				'  <img src="' +  samplepath2 + '" class="third">' +

@@ -203,7 +203,7 @@ label.error {
 	z-index: 2;
 }
 
-.sample img.first {
+.sample img.initial {
 	position: relative;
 	z-index: 1;
 }
@@ -218,18 +218,23 @@ label.error {
 
 /* Show samples one after the other */
 
-.second {
+.first {
 	animation: cssAnimation 0s 0.5s forwards;
 	visibility: hidden;
 }
 
+.second {
+	animation: cssAnimation 0s 1s forwards;
+	visibility: hidden;
+}
+
 .third {
-	animation: cssAnimation 0s 1.5s forwards;
+	animation: cssAnimation 0s 2s forwards;
 	visibility: hidden;
 }
 
 .last {
-	animation: cssAnimation 0s 2s forwards;
+	animation: cssAnimation 0s 2.5s forwards;
 	visibility: hidden;
 }
 

@@ -149,7 +149,7 @@ var total_trials = practice_samples.length + main_samples.length
 // ----------------------------------------------------------------------------------------------------
 
 // settings: URLs and paths
-const form_url = "https://getform.io/f/eb496034-9170-4c5f-a86a-703fb9005800"
+const form_url = "https://getform.io/f/8be65ead-4649-400d-90ee-48eeac8df3fb"
 const maskpath = "samples/SVGs/mask.svg"
 const emptypath = "samples/SVGs/empty.svg"
 
@@ -236,8 +236,6 @@ function nextSection() {
 		miliseconds = current_time - previous_time
 		response = current_fs.children(".response").val()
 		user_response = $(this).val()
-		response += ", " + user_response + ", " + miliseconds
-		current_fs.children(".response").val(response)
 		if (practice_in_progress) {
 			pair = current_fs.children(".response").val().split(",")
 			response_id = current_fs.children(".response").attr("id").split("_")[1]  // get just the number
@@ -253,7 +251,12 @@ function nextSection() {
 			if (user_response.includes(correct_response)) {
 				correct_results.push(time)
 			}
+		} else {
+			time = main_times[0]
 		}
+		// update response
+		response += ", " + user_response + ", " + time + ", " + miliseconds
+		current_fs.children(".response").val(response)
 	}
 	previous_time = current_time
 

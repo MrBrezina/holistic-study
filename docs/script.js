@@ -160,7 +160,8 @@ function trialsHTML(fieldset, samples, times, title) {
 		sample2 = pair[1]
 		// set time
 		time = times[index]
-		pause_time = 750
+		intro_time = 300
+		mask_time = 500
 		id = title.toLowerCase() + '_' + (index + 1)
 		// create containing fieldset
 		fieldset.after('<fieldset class="trial" id="fieldset_' + id + '"><h2>' + title + ': do the top halfs of these look identical?</h2></fieldset>')
@@ -175,10 +176,10 @@ function trialsHTML(fieldset, samples, times, title) {
 		fieldset.append('<div class="trialarea">' +
 						'  <div class="sample">' +
 						'    <img src="' +  emptypath    + '" class="initial">' +
-						'    <img src="' +  sample1_path + '" style="animation: cssAnimation 0s ' + pause_time + 'ms forwards; visibility: hidden;">' +                   // first sample appears `pause_time` after initial
-						'    <img src="' +  maskpath     + '" style="animation: cssAnimation 0s ' + (pause_time + time) + 'ms forwards; visibility: hidden;">' +          // mask appears `time` after first sample
-						'    <img src="' +  sample2_path + '" style="animation: cssAnimation 0s ' + (2 * pause_time + time) + 'ms forwards; visibility: hidden;">' +      // second sample appears `pause_time` after mask
-						'    <img src="' +  emptypath    + '" style="animation: cssAnimation 0s ' + (2 * pause_time + 2 * time) + 'ms forwards; visibility: hidden;">' +  // final empty sample appears `time` after second sample
+						'    <img src="' +  sample1_path + '" style="animation: cssAnimation 0s ' + intro_time + 'ms forwards; visibility: hidden;">' +                           // first sample appears `intro_time` after initial
+						'    <img src="' +  maskpath     + '" style="animation: cssAnimation 0s ' + (intro_time + time) + 'ms forwards; visibility: hidden;">' +                  // mask appears `time` after first sample
+						'    <img src="' +  sample2_path + '" style="animation: cssAnimation 0s ' + (intro_time + mask_time + time) + 'ms forwards; visibility: hidden;">' +      // second sample appears `mask_time` after mask
+						'    <img src="' +  emptypath    + '" style="animation: cssAnimation 0s ' + (intro_time + mask_time + 2 * time) + 'ms forwards; visibility: hidden;">' +  // final empty sample appears `time` after second sample
 						'  </div>' +
 						'  <div class="buttons">' +
 						'    <input type="button" class="next button last" value="Sure same">' +
@@ -189,7 +190,7 @@ function trialsHTML(fieldset, samples, times, title) {
 						'</div>')
 	
 		// this record will contain: samples, response, miliseconds
-		fieldset.append('<input type="hidden" name="' + id + '" id="' + id + '" value="' + sample1 + ',' + sample2 + '" class="hidden response">')
+		fieldset.append('<input type="hidden" name="' + id + '" id="' + id + '" value="' + sample1 + ',' + sample2 + ',' + evaluatePair(sample1, sample2) + '" class="hidden response">')
 	
 		// progress bar
 		fieldset.append('<h4>Progress</h4><div class="bar"><div class="progressbar" style="width:' + Math.floor(counter / total_trials * 100) + '%"></div></div>')
@@ -237,12 +238,12 @@ function nextSection() {
 		response = current_fs.children(".response").val()
 		user_response = $(this).val()
 		if (practice_in_progress) {
-			pair = current_fs.children(".response").val().split(",")
+			tuple = current_fs.children(".response").val().split(",")
 			response_id = current_fs.children(".response").attr("id").split("_")[1]  // get just the number
 			response_id = Number(response_id) - 1 // make zero-based
 			time = practice_times[response_id]
 			// see if the response is correct
-			same = evaluatePair(pair[0], pair[1])
+			same = tuple[2]
 			if (same) {
 				correct_response = "same"
 			} else {

@@ -269,7 +269,7 @@ function nextSection() {
 		} else {
 			mean_correct = max_time
 		}
-		time = (sum(practice_times) / practice_times.length - min_time) / correct_results.length * 0.75 * practice_times.length + min_time
+		time = (sum(practice_times) / practice_times.length - min_time) / correct_results.length * 0.7 * practice_times.length + min_time
 		// sanity check
 		// console.log(correct_results)
 		// console.log(sum(practice_times) / practice_times.length, practice_times.length, correct_results.length, time)

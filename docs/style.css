@@ -74,7 +74,6 @@ fieldset {
 	padding: 30px 40px;
 	box-sizing: border-box;
 	width: 80%;
-	min-width: 600px;
 	max-width: 1000px;
 	margin: 0 auto;
 	
@@ -85,23 +84,6 @@ fieldset {
 fieldset.text,
 fieldset.validate {
 	padding-right: 4em;
-}
-
-/* Responsive */
-
-@media only screen and (max-device-width: 900px), only screen and (max-width: 1000px) {
-	#msform {
-		margin: 50px auto;
-	}
-	fieldset {
-		width: 100%;
-		padding: 20px;
-		margin: 0;
-	}
-	fieldset.text,
-	fieldset.validate {
-		padding-right: 40px;
-	}
 }
 
 label.error {
@@ -149,7 +131,7 @@ input.button {
 	border: none;
 	cursor: pointer;
 	padding: 10px 5px;
-	margin: 2em 0;
+	margin: 3em 0 2em;
 	border-radius: 2px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -170,21 +152,21 @@ input.button {
 	width: 20%;
 	min-width: 180px;
 	height: 50px;
+	margin: 2em 0.6em;
 	background: #ddd;
 	border: none;
 	border-radius: 2px;
 	padding: 0;
-	margin: 2em 0.6em;
 }
 
 .buttons input.button {
 	display: block;
-	width: 100%;
 	color: #fff;
 	background: rgb(24, 24, 24);
 	text-align: center;
 	font-weight: bold;
 	font-size: 90%;
+	width: 100%;
 	border: none;
 	cursor: pointer;
 	padding: 10px 5px;
@@ -260,18 +242,51 @@ div.trialarea {
 
 /* Responsive */
 
-@media only screen and (max-device-width: 900px), only screen and (max-width: 1000px) {
-	.sample, .sample img, .countdown {
-		width: 90%;
+@media only screen and (max-device-width: 1000px), only screen and (max-width: 1000px) {
+	#msform {
+		margin: 0 auto;
 	}
-	.buttons span {
-		min-width: 100px;
-		height: 70px;
-	}
-	.buttons input.button {
-		font-size: 80%;
+	fieldset {
+		width: 100%;
+		padding: 20px;
+		margin: 0;
 	}
 
+	fieldset.text,
+	fieldset.validate {
+		padding-right: 40px;
+	}
+
+	.sample, .sample img, .countdown {
+		width: 300px;
+		height: 300px;
+	}
+
+	.countdown {
+		line-height: 295px;
+	}
+
+	.buttons {
+		padding: 0;
+	}
+	.buttons span {
+		height: 75px;
+		font-size: 80%;
+		width: 20%;
+		min-width: 50px;
+		margin: 2em 0.2em;
+		border: 1px solid white;
+	}
+	input.button {
+		height: 75px;
+		min-width: 50px;
+		padding: 1em;
+		margin: 3em 0 2em;
+	}
+	.buttons input.button {
+		/* width: 100%; */
+		margin: 0;
+	}
 }
 
 

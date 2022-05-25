@@ -155,13 +155,13 @@ function trialsHTML(fieldset, samples, times, title) {
 		trial += '  <div class="sample">'
 		trial += '    <img src="' +  emptypath    + '" class="initial">'
 		if (index == 0) {
-			// trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">3</div>'
-			// time += intro_time
-			// trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">2</div>'
-			// time += intro_time
-			// trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">1</div>'
-			// time += intro_time
-			// trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></div>'
+			trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">3</div>'
+			time += intro_time
+			trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">2</div>'
+			time += intro_time
+			trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">1</div>'
+			time += intro_time
+			trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></div>'
 		}
 		// first sample appears `intro_time` after initial
 		time += intro_time

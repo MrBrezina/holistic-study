@@ -67,33 +67,6 @@ function evaluatePair(first_letter, second_letter) {
 	return first_letter.slice(0, -1) == second_letter.slice(0, -1)
 }
 
-// convert array of values to cummulative values
-function cummulative(x) {
-	res = 0
-	results = []
-	x.forEach(function (v, index, array) {
-		res += v
-		results.push(res)
-	})
-	return results
-}
-
-// get AUC
-function getAUC(x, y) {
-    // make cummulative
-	x = cummulative(x)
-	y = cummulative(y)
-    // normalize
-    // x = [xi/max(x) for xi in x]
-    // y = [yi/max(y) for yi in y]
-    // auc = 0
-    // x1, y1 = 0, 0
-    // for x2, y2 in zip(x, y):
-    //     auc += (x2 - x1) * (y1 + y2) / 2
-    //     x1, y1 = x2, y2
-    // return auc
-}
-
 // stupid javascript
 function sum(x) {
 	return x.reduce((a, b) => a + b, 0)
@@ -108,13 +81,16 @@ function mean(x) {
 	}
 }
 
+
 // ----------------------------------------------------------------------------------------------------
 // set up the trials
 // ----------------------------------------------------------------------------------------------------
 
 // samples for trials
-practice_samples = shuffle(getAllLetterCombos(["e", "u", "n"]))
-main_samples = shuffle(getAllLetterCombos(["a", "e", "h", "j", "n", "u"]))
+practice_samples = getAllLetterCombos(["e", "u", "n"])
+shuffle(practice_samples)
+main_samples = getAllLetterCombos(["a", "e", "h", "j", "n", "u"]).concat(getAllLetterCombos(["a", "e", "h", "j", "n", "u"]))
+shuffle(main_samples)
 
 // times for practice trials
 practice_times = []
@@ -159,8 +135,9 @@ function trialsHTML(fieldset, samples, times, title) {
 		sample1 = pair[0]
 		sample2 = pair[1]
 		// set time
-		time = times[index]
-		intro_time = 300
+		time = 0
+		sample_time = times[index]
+		intro_time = 750
 		mask_time = 500
 		id = title.toLowerCase() + '_' + (index + 1)
 		// create containing fieldset
@@ -173,22 +150,41 @@ function trialsHTML(fieldset, samples, times, title) {
 		// sanity check
 		// console.log(pair, time)
 
-		fieldset.append('<div class="trialarea">' +
-						'  <div class="sample">' +
-						'    <img src="' +  emptypath    + '" class="initial">' +
-						'    <img src="' +  sample1_path + '" style="animation: cssAnimation 0s ' + intro_time + 'ms forwards; visibility: hidden;">' +                           // first sample appears `intro_time` after initial
-						'    <img src="' +  maskpath     + '" style="animation: cssAnimation 0s ' + (intro_time + time) + 'ms forwards; visibility: hidden;">' +                  // mask appears `time` after first sample
-						'    <img src="' +  sample2_path + '" style="animation: cssAnimation 0s ' + (intro_time + mask_time + time) + 'ms forwards; visibility: hidden;">' +      // second sample appears `mask_time` after mask
-						'    <img src="' +  emptypath    + '" style="animation: cssAnimation 0s ' + (intro_time + mask_time + 2 * time) + 'ms forwards; visibility: hidden;">' +  // final empty sample appears `time` after second sample
-						'  </div>' +
-						'  <div class="buttons">' +
-						'    <input type="button" class="next button last" value="Sure same">' +
-						'    <input type="button" class="next button last" value="Probably same">' +
-						'    <input type="button" class="next button last" value="Probably different">' +
-						'    <input type="button" class="next button last right" value="Sure different">' +
-						'  </div>' +
-						'</div>')
-	
+		time_ = 0
+		trial  = '<div class="trialarea">'
+		trial += '  <div class="sample">'
+		trial += '    <img src="' +  emptypath    + '" class="initial">'
+		if (index == 0) {
+			// trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">3</div>'
+			// time += intro_time
+			// trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">2</div>'
+			// time += intro_time
+			// trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">1</div>'
+			// time += intro_time
+			// trial += '    <div class="countdown" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></div>'
+		}
+		// first sample appears `intro_time` after initial
+		time += intro_time
+		trial +='    <img src="' +  sample1_path + '" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">'                         
+		// mask appears `time` after first sample
+		time += sample_time
+		trial +='    <img src="' +  maskpath     + '" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">'               
+		// second sample appears `mask_time` after mask
+		time += mask_time
+		trial +='    <img src="' +  sample2_path + '" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">'    
+		// final empty sample appears `time` after second sample
+		time += sample_time
+		trial +='    <img src="' +  emptypath    + '" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">'
+		trial +='  </div>'
+		trial +='  <div class="buttons">'
+		trial +='    <span><input type="button" class="next button" value="Sure same" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='    <span><input type="button" class="next button" value="Probably same" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='    <span><input type="button" class="next button" value="Probably different" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='    <span><input type="button" class="next button" value="Sure different" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='  </div>'
+		trial +='</div>'
+		
+		fieldset.append(trial)
 		// this record will contain: samples, response, miliseconds
 		fieldset.append('<input type="hidden" name="' + id + '" id="' + id + '" value="' + sample1 + ',' + sample2 + ',' + evaluatePair(sample1, sample2) + '" class="hidden response">')
 	
@@ -218,7 +214,7 @@ var animating  // flag to prevent quick multi-click glitches
 var previous_time  // last time when participant clicked any button
 var current_time
 var practice_in_progress = true
-var correct_results = []
+var total_correct = 0
 function nextSection() {
 	if (animating) return false
 	form.validate()
@@ -226,8 +222,9 @@ function nextSection() {
 	animating = true
 
 	current_fs = $(this).parent()
-	if (current_fs.attr("class") == "buttons") {
-		current_fs = current_fs.parent().parent()
+	// deal with nested buttons in trialarea
+	if (current_fs.parent().attr("class") == "buttons") {
+		current_fs = current_fs.parent().parent().parent()
 	}
 	next_fs = current_fs.next()
 	current_time = Number(new Date().getTime())
@@ -250,7 +247,7 @@ function nextSection() {
 				correct_response = "different"
 			}
 			if (user_response.includes(correct_response)) {
-				correct_results.push(time)
+				total_correct += 1
 			}
 		} else {
 			time = main_times[0]
@@ -263,16 +260,9 @@ function nextSection() {
 
 	// draw the main part after the practice has been finished
 	if ((next_fs.attr("id") == "main") && (practice_in_progress == true)) {
-		// calculate the time based on the mean of the correct responses
-		if(correct_results) {
-			mean_correct = sum(correct_results) / correct_results.length
-		} else {
-			mean_correct = max_time
-		}
-		time = (sum(practice_times) / practice_times.length - min_time) / correct_results.length * 0.7 * practice_times.length + min_time
+		time = 0.7 * (sum(practice_times) / practice_times.length - min_time) * practice_times.length / total_correct + min_time
 		// sanity check
-		// console.log(correct_results)
-		// console.log(sum(practice_times) / practice_times.length, practice_times.length, correct_results.length, time)
+		// console.log(sum(practice_times) / practice_times.length, practice_times.length, total_correct, time)
 		// set the times
 		main_times = []
 		main_samples.forEach(function (pair, index, array) {

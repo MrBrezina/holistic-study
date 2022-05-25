@@ -67,7 +67,7 @@ ol.tight li {
 	position: relative;
 }
 
-#msform fieldset {
+fieldset {
 	background: white;
 	border: 1px solid #555;
 	border-radius: 2px;
@@ -82,8 +82,8 @@ ol.tight li {
 	position: relative;
 }
 
-#msform fieldset.text,
-#msform fieldset.validate {
+fieldset.text,
+fieldset.validate {
 	padding-right: 4em;
 }
 
@@ -93,13 +93,13 @@ ol.tight li {
 	#msform {
 		margin: 50px auto;
 	}
-	#msform fieldset {
+	fieldset {
 		width: 100%;
 		padding: 20px;
 		margin: 0;
 	}
-	#msform fieldset.text,
-	#msform fieldset.validate {
+	fieldset.text,
+	fieldset.validate {
 		padding-right: 40px;
 	}
 }
@@ -114,13 +114,13 @@ label.error {
 
 /* hide all fieldsets except the first */
 
-#msform fieldset:not(:first-of-type) {
+fieldset:not(:first-of-type) {
 	display: none;
 }
 
 /* inputs */
 
-#msform input, #msform textarea, #msform select {
+input, textarea, select {
 	display: block;
 	float: none;
 	padding: 10px 2px;
@@ -136,16 +136,8 @@ label.error {
 
 /* buttons */
 
-.buttons {
-	display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
-#msform input.button {
+input.button {
 	display: block;
-	float: left;
 	width: 50%;
 	min-width: 180px;
 	height: 50px;
@@ -154,38 +146,77 @@ label.error {
 	text-align: center;
 	font-weight: bold;
 	font-size: 90%;
-	border: 0 none;
+	border: none;
 	cursor: pointer;
 	padding: 10px 5px;
-	margin: 2em 20px 2em 0;
+	margin: 2em 0;
 	border-radius: 2px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
 }
 
-#msform .button:hover, #msform .button:focus {
+/* used in trial area */
+.buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.buttons span {
+	display: block;
+	float: left;
+	width: 20%;
+	min-width: 180px;
+	height: 50px;
+	background: #ddd;
+	border: none;
+	border-radius: 2px;
+	padding: 0;
+	margin: 2em 0.6em;
+}
+
+.buttons input.button {
+	display: block;
+	width: 100%;
+	color: #fff;
+	background: rgb(24, 24, 24);
+	text-align: center;
+	font-weight: bold;
+	font-size: 90%;
+	border: none;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 0;
+	border-radius: 2px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.button:hover, .button:focus, .buttons input.button:hover {
 	background: rgb(53, 53, 53);
 }
 
-#msform .button.single {
-	float: none;
+.button:active, .buttons input.button:active {
+	background: #c00;
 }
 
-#msform .button.right {
-	margin: 10px 0;
+.button.single {
+	float: none;
 }
 
 /* trial area and buttons */
 
-#msform div.trialarea {
+div.trialarea {
 	width: 100%;
 	margin: 0 auto;
 	padding: 0;
 	text-align: center;
 }
 
-#msform .sample {
+.sample {
 	position: relative;
 	top: 0;
 	left: 0;
@@ -194,14 +225,24 @@ label.error {
 	margin: 40px auto 70px;
 }
 
-#msform img {
+.sample img, .countdown {
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 200px;
 	height: 200px;
-    border: 1px solid #ccc;
+  border: 1px solid #ccc;
 	z-index: 2;
+}
+
+.countdown {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 6em;
+	font-weight: bold;
+	text-align: center;
+  line-height: 195px;
+	color: #c00;
+	background: #fff;
 }
 
 .sample img.initial {
@@ -209,18 +250,9 @@ label.error {
 	z-index: 1;
 }
 
-#msform div.trialarea input.button {
-	width: 20%;
-	margin: 10px 2% 10px 0;
-}
-
-#msform div.trialarea input.button.right {
-	margin: 10px 0;
-}
-
 /* Show samples one after the other */
 
-@keyframes cssAnimation {
+@keyframes animateDissolve {
 	to {
 		visibility: visible;
 	}
@@ -228,10 +260,18 @@ label.error {
 
 /* Responsive */
 
-@media only screen and (max-device-width: 1000px), only screen and (max-width: 1000px) {
-	#msform div.trialarea input.button {
+@media only screen and (max-device-width: 900px), only screen and (max-width: 1000px) {
+	.sample, .sample img, .countdown {
+		width: 90%;
+	}
+	.buttons span {
+		min-width: 100px;
+		height: 70px;
+	}
+	.buttons input.button {
 		font-size: 80%;
 	}
+
 }
 
 

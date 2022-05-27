@@ -62,7 +62,7 @@ function getAllLetterCombos(letters) {
 	return pairs
 }
 
-// evaluate if the top halfs of two samples are same
+// evaluate if the top halves of two samples are same
 function evaluatePair(first_letter, second_letter) {
 	return first_letter.slice(0, -1) == second_letter.slice(0, -1)
 }
@@ -141,7 +141,7 @@ function trialsHTML(fieldset, samples, times, title) {
 		mask_time = 500
 		id = title.toLowerCase() + '_' + (index + 1)
 		// create containing fieldset
-		fieldset.after('<fieldset class="trial" id="fieldset_' + id + '"><h2>' + title + ': do the top halfs of these look identical?</h2></fieldset>')
+		fieldset.after('<fieldset class="trial" id="fieldset_' + id + '"><h2>' + title + ': do the top halves of these look identical?</h2></fieldset>')
 		fieldset = $("#fieldset_" + id)
 		sample1_path = "samples/SVGs/" + sample1 + ".svg"
 		sample2_path = "samples/SVGs/" + sample2 + ".svg"

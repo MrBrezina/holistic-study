@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <path d="M0,0 l200,0 l0,200 l-200,0 Z M0,0" fill="rgb(255,255,255)" transform="matrix(1,0,0,-1,0,200)"/>
+ <clipPath id="clip563">
+  <path clip-rule="evenodd" d="M0,43.79 l200,0 l0,200 l-200,0 Z M0,43.79" transform="matrix(1,0,0,-1,0,150)"/>
+ </clipPath>
+ <g clip-path="url(#clip563)">
+  <path d="M108.0,0 l26.08,63.33 c4.5,10.75,7.75,18.5,13.33,21.75 l0,2.5 l-27.25,0 l0,-2.5 c3.0,-3.25,4.33,-10.83,0.08,-21.75 l-19.17,-48.75 l-1.0,0 l-19.33,48.75 c-4.5,10.75,-3.0,18.5,0,21.75 l0,2.5 l-27.67,0 l0,-2.5 c5.58,-3.25,8.58,-11.0,12.83,-21.75 l26.08,-63.33 Z M108.0,0" fill="rgb(0,0,0)" transform="matrix(1,0,0,-1,0,150)"/>
+ </g>
+ <clipPath id="clip564">
+  <path clip-rule="evenodd" d="M0,-50 l200,0 l0,93.79 l-200,0 Z M0,-50" transform="matrix(1,0,0,-1,0,150)"/>
+ </clipPath>
+ <g clip-path="url(#clip564)">
+  <path d="M108.0,0 l26.17,63.33 c4.0,9.92,7.25,17.75,12.08,22.58 l0,1.67 l-22.92,0 l0,-1.67 c0.92,-4.83,0.83,-12.67,-3.08,-22.58 l-19.17,-48.75 l-1.0,0 l-19.33,48.75 c-4.0,9.92,-4.17,17.75,-3.25,22.58 l0,1.67 l-23.42,0 l0,-1.67 c4.83,-4.83,7.83,-12.67,11.83,-22.58 l26.08,-63.33 Z M108.0,0" fill="rgb(0,0,0)" transform="matrix(1,0,0,-1,0,150)"/>
+ </g>
+ <path d="M0,43.79 l200,0" fill="none" stroke="rgb(255,0,0)" stroke-width="1" transform="matrix(1,0,0,-1,0,150)"/>
+</svg>

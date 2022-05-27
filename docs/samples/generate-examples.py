@@ -1,4 +1,5 @@
 import drawBot as db
+from random import randint
 
 holifonts = {}
 for f in db.installedFonts():
@@ -8,10 +9,13 @@ for f in db.installedFonts():
 
 w, h = 200, 200
 
+letters = "abcdefhijlnopqrtuvyz"
+variants = "ABCD"
+
 def draw_sample(letter, top, bottom, drawline=True):
 
     fsize = 175
-    with savedState():
+    with db.savedState():
         # draw background and settings
         db.fill(0)
         db.stroke(None)
@@ -57,9 +61,9 @@ def draw_sample(letter, top, bottom, drawline=True):
             db.line((0, xh / 2), (w, xh / 2))
 
 # draw samples
-for letter in "aehjnu": # not using ilv
-    for top in "ABCDE":
-        for bottom in "ABCDE":
+for letter in letters:
+    for top in variants:
+        for bottom in variants:
             db.newDrawing()
             db.newPage(w, h)
             db.fill(1)
@@ -93,11 +97,11 @@ for y in range(0, rows):
 db.stroke(None)
 db.fill(1, 0, 0)
 bit *= 1.5
-db.oval((w - bit) / 2, (h - bit) / 2, bit, bit)
-        
+db.oval((w - bit) / 2, (h - bit) / 2, bit, bit)        
 db.saveImage("SVGs/mask.svg")
 db.endDrawing()
 
+# draw empty image
 db.newDrawing()
 db.newPage(w, h)
 db.fill(1)
@@ -105,3 +109,43 @@ db.rect(0, 0, w, h)
 db.saveImage("SVGs/empty.svg")
 # db.saveImage("PDFs/empty.pdf")
 db.endDrawing()
+
+# compile HTML to preview the samples
+
+html = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <title>Study: overview of all samples</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+%s
+</body>
+</html>
+"""
+
+x = ""
+# 4x4
+for letter in letters:
+    x += "<p>"
+    for top in variants:
+        for bottom in variants:
+            x += "<img src='SVGs/%s_%s%s.svg'> " % (letter, top, bottom)
+        x += "<br>\n"
+    x += "</p>\n\n"
+
+# 3x3
+for letter in letters:
+    x += "<p>"
+    for top in "ABD":
+        for bottom in "ABD":
+            x += "<img src='SVGs/%s_%s%s.svg'> " % (letter, top, bottom)
+        x += "<br>\n"
+    x += "</p>\n\n"
+
+html = html % x
+
+with open("index.html", "w") as f:
+    f.write(html)

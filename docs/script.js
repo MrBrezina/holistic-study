@@ -35,30 +35,26 @@ function getIndexes(count, total) {
 
 // get all combinations for all letters
 function getAllLetterCombos(letters) {
-	// mapping used to select a representative variant for top/bottom of the letter
-	var map = ["A", "B", "C", "D"]
-	// possible combinations
+	// combinations of samples we use
 	combos = [
-		[[0, 0], [0, 0]],
-		[[0, 1], [0, 1]],
-		[[0, 1], [0, 2]],
-		[[0, 1], [2, 3]], // not [0, 1] [1, 2] to avoid confounding variable
-		[[0, 0], [1, 1]],
-		[[0, 1], [2, 1]],
+		["AA", "AA"],
+		["AB", "AB"],
+		["AB", "AC"],
+		["AA", "BB"],
+		["AB", "CB"]
 	]
-	shuffle(letters)
 	shuffle(combos)
 	pairs = []
 	letters.forEach(function (letter, index1, array1) {
 		combos.forEach(function (combo_pair, index2, array2) {
-			shuffle(map)
 			pair = [
-				letter + "_" + map[combo_pair[0][0]] + map[combo_pair[0][1]],
-				letter + "_" + map[combo_pair[1][0]] + map[combo_pair[1][1]]
+				letter + "_" + combo_pair[0],
+				letter + "_" + combo_pair[1]
 			]
 			pairs.push(pair)
 		})
 	})
+	shuffle(pairs)
 	return pairs
 }
 
@@ -86,10 +82,11 @@ function mean(x) {
 // set up the trials
 // ----------------------------------------------------------------------------------------------------
 
+// all available letters: a, b, c, d, e, f, h, i, j, l, n, p, q, r, t, u, y, z and o, v which are not ideal
 // samples for trials
-practice_samples = getAllLetterCombos(["e", "u", "n"])
+practice_samples = getAllLetterCombos(["i", "c", "u"])  // 3 x 6 = 18 trials
 shuffle(practice_samples)
-main_samples = getAllLetterCombos(["a", "e", "h", "j", "n", "u"]).concat(getAllLetterCombos(["a", "e", "h", "j", "n", "u"]))
+main_samples = getAllLetterCombos(["a", "b", "e", "f", "h", "j", "l", "n", "p", "r", "t", "z"])  // 3 x 6 = 18 trials
 shuffle(main_samples)
 
 // times for practice trials

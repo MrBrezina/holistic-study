@@ -9,7 +9,7 @@ for f in db.installedFonts():
 
 w, h = 200, 200
 
-letters = "abcdefhijlnopqrtuvyz"
+letters = "abcdefhijlnopqrtuyz"
 variants = "ABCD"
 
 def draw_sample(letter, top, bottom, drawline=True):
@@ -126,6 +126,14 @@ html = """
 </html>
 """
 
+# Combo pattern needed
+# [[0, 0], [0, 0]],
+# [[0, 1], [0, 1]],
+# [[0, 1], [0, 2]],
+# [[0, 1], [2, 3]], // not [0, 1] [1, 2] to avoid confounding variable
+# [[0, 0], [1, 1]],
+# [[0, 1], [2, 1]],
+
 x = ""
 # 4x4
 for letter in letters:
@@ -134,15 +142,19 @@ for letter in letters:
         for bottom in variants:
             x += "<img src='SVGs/%s_%s%s.svg'> " % (letter, top, bottom)
         x += "<br>\n"
-    x += "</p>\n\n"
-
-# 3x3
-for letter in letters:
-    x += "<p>"
-    for top in "ABD":
-        for bottom in "ABD":
-            x += "<img src='SVGs/%s_%s%s.svg'> " % (letter, top, bottom)
-        x += "<br>\n"
+    for first, second in [["AA", "AA"],
+                          ["AB", "AB"],
+                          ["AB", "AC"]
+                          ]:
+            x += "<img src='SVGs/%s_%s.svg'>" % (letter, first)
+            x += "<img src='SVGs/%s_%s.svg'> " % (letter, second)
+    x += "<br>\n"
+    for first, second in [["AB", "CD"],
+                          ["AA", "BB"],
+                          ["AB", "CB"]
+                          ]:
+            x += "<img src='SVGs/%s_%s.svg'>" % (letter, first)
+            x += "<img src='SVGs/%s_%s.svg'> " % (letter, second)
     x += "</p>\n\n"
 
 html = html % x

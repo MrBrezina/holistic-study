@@ -56,10 +56,10 @@ function getAllLetterCombos(letters) {
 	combos = [
 		["AA", "AA"],
 		["AD", "AD"],
-		["AD", "AC"],
-		["AD", "CB"],
+		["AD", "AB"],
+		["AD", "BC"],
 		["AA", "DD"],
-		["AD", "CD"]
+		["AD", "BD"]
 	]
 	pairs = []
 	letters.forEach(function (letter, index1, array1) {
@@ -103,7 +103,7 @@ function mean(x) {
 // samples for trials
 practice_samples = getAllLetterCombos(["i", "d", "u"])  // 3 x 6 = 18 trials
 shuffle(practice_samples)
-main_samples = getAllLetterCombos(["a", "b", "c", "e", "f", "h", "j", "n", "p", "r", "t", "z"])  // 12 x 6 = 72 trials
+main_samples = getAllLetterCombos(["a", "b", "c", "e", "l", "h", "j", "n", "p", "r", "t", "z"])  // 12 x 6 = 72 trials
 shuffle(main_samples)
 
 // times for practice trials

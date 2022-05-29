@@ -99,11 +99,11 @@ function mean(x) {
 // set up the trials
 // ----------------------------------------------------------------------------------------------------
 
-// all available letters: a, b, c, d, e, f, h, i, j, n, p, q, r, t, u, y, z and l, o, v which are not ideal
+// all available letters: a, b, c, d, e, f*, h, i, j, l*, n, o*, p, q, r, t, u, v*, y*, z where those marked with asterisk are not used (not ideal shape or not needed)
 // samples for trials
 practice_samples = getAllLetterCombos(["i", "d", "u"])  // 3 x 6 = 18 trials
 shuffle(practice_samples)
-main_samples = getAllLetterCombos(["a", "b", "c", "e", "l", "h", "j", "n", "p", "r", "t", "z"])  // 12 x 6 = 72 trials
+main_samples = getAllLetterCombos(["a", "b", "c", "e", "h", "j", "n", "p", "q", "r", "t", "z"])  // 12 x 6 = 72 trials
 shuffle(main_samples)
 
 // times for practice trials
@@ -274,9 +274,12 @@ function nextSection() {
 
 	// draw the main part after the practice has been finished
 	if ((next_fs.attr("id") == "main") && (practice_in_progress == true)) {
-		time = 0.7 * (sum(practice_times) / practice_times.length - min_time) * practice_times.length / total_correct + min_time
+		mean = sum(practice_times) / practice_times.length
+		time = 0.7 * (mean) * Math.sqrt(practice_times.length / total_correct)
+		// round to 1 decimal
+		time = time.toFixed(1)
 		// sanity check
-		// console.log(sum(practice_times) / practice_times.length, practice_times.length, total_correct, time)
+		// console.log(mean, practice_times.length, total_correct, time)
 		// set the times
 		main_times = []
 		main_samples.forEach(function (pair, index, array) {

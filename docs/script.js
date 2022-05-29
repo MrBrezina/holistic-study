@@ -68,7 +68,6 @@ function getAllLetterCombos(letters) {
 				letter + "_" + combo_pair[0],
 				letter + "_" + combo_pair[1]
 			]
-			shuffle(pair)
 			pairs.push(pair)
 		})
 	})
@@ -80,20 +79,6 @@ function evaluatePair(first_letter, second_letter) {
 	return first_letter.slice(0, -1) == second_letter.slice(0, -1)
 }
 
-// stupid javascript
-function sum(x) {
-	return x.reduce((a, b) => a + b, 0)
-}
-
-// mean
-function mean(x) {
-	if (x.length > 0) {
-		return sum(x) / x.length
-	} else {
-		return 0
-	}
-}
-
 
 // ----------------------------------------------------------------------------------------------------
 // set up the trials
@@ -101,8 +86,30 @@ function mean(x) {
 
 // all available letters: a, b, c, d, e, f*, h, i, j, l*, n, o*, p, q, r, t, u, v*, y*, z where those marked with asterisk are not used (not ideal shape or not needed)
 // samples for trials
-practice_samples = getAllLetterCombos(["i", "d", "u"])  // 3 x 6 = 18 trials
-shuffle(practice_samples)
+// practice_samples = getAllLetterCombos(["i", "d", "u"])  // 3 x 6 = 18 trials
+// shuffle(practice_samples)
+// we want practice_samples in fixed random order for all participants
+practice_samples = [
+	["d_DD", "d_AA"],
+	["d_AA", "d_AA"],
+	["i_AA", "i_DD"],
+	["d_BC", "d_AD"],
+	["i_AD", "i_BD"],
+	["d_AD", "d_BD"],
+	["u_AB", "u_AD"],
+	["d_AD", "d_AB"],
+	["u_AD", "u_BC"],
+	["u_AA", "u_AA"],
+	["i_AD", "i_BC"],
+	["i_AB", "i_AD"],
+	["u_AD", "u_AD"],
+	["u_AA", "u_DD"],
+	["d_AD", "d_AD"],
+	["i_AA", "i_AA"],
+	["u_BD", "u_AD"],
+	["i_AD", "i_AD"]
+	]
+
 main_samples = getAllLetterCombos(["a", "b", "c", "e", "h", "j", "n", "p", "q", "r", "t", "z"])  // 12 x 6 = 72 trials
 shuffle(main_samples)
 
@@ -125,6 +132,13 @@ practice_samples.forEach(function (pair, index, array) {
 	}
 })
 
+// additionally, we want two practice samples repeat in the beginning
+// to compensate for potential initial errors
+practice_samples.unshift(["u_DD", "u_AA"])  // repeated
+practice_times.unshift(800)
+practice_samples.unshift(["d_AD", "d_BC"])  // repeated
+practice_times.unshift(800)
+
 // sanity check
 // console.log("Practice")
 // console.log(practice_samples)
@@ -146,6 +160,7 @@ const emptypath = "samples/SVGs/empty.svg"
 // compose a sequence of trials
 function trialsHTML(fieldset, samples, times, title) {
 	samples.forEach(function (pair, index, array) {
+		shuffle(pair)
 		sample1 = pair[0]
 		sample2 = pair[1]
 		// set time
@@ -254,15 +269,18 @@ function nextSection() {
 			response_id = Number(response_id) - 1 // make zero-based
 			time = practice_times[response_id]
 			// see if the response is correct
-			same = tuple[2]
+			same = evaluatePair(tuple[0], tuple[1])
+			// check if response is good, ignore the first two practice samples
 			if (same) {
 				correct_response = "same"
 			} else {
 				correct_response = "different"
 			}
-			if (user_response.includes(correct_response)) {
+			// check if response is good, ignore the first two practice samples
+			if ((response_id > 1) && user_response.includes(correct_response)) {
 				total_correct += 1
 			}
+			// console.log(response, user_response, same, correct_response, user_response.includes(correct_response))
 		} else {
 			time = main_times[0]
 		}
@@ -274,12 +292,15 @@ function nextSection() {
 
 	// draw the main part after the practice has been finished
 	if ((next_fs.attr("id") == "main") && (practice_in_progress == true)) {
-		mean = sum(practice_times) / practice_times.length
-		time = 0.7 * (mean) * Math.sqrt(practice_times.length / total_correct)
+		// ignore the first two samples
+		practice_times = practice_times.slice(2)
+		// interpolate the time depending on how many correct response were given
+		total = practice_times.length
+		time = min_time + (max_time - min_time) * (total - total_correct) / total
 		// round to 1 decimal
-		time = time.toFixed(1)
+		time = Number(time.toFixed(1))
 		// sanity check
-		// console.log(mean, practice_times.length, total_correct, time)
+		//console.log(practice_times, total, total_correct, time)
 		// set the times
 		main_times = []
 		main_samples.forEach(function (pair, index, array) {

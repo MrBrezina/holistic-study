@@ -296,7 +296,7 @@ function nextSection() {
 		practice_times = practice_times.slice(2)
 		// interpolate the time depending on how many correct response were given
 		total = practice_times.length
-		time = min_time + (max_time - min_time) * (total - total_correct) / total
+		time = 0.75 * (min_time + (max_time - min_time) * (total - total_correct) / total)
 		// round to 1 decimal
 		time = Number(time.toFixed(1))
 		// sanity check

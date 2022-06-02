@@ -213,11 +213,15 @@ function trialsHTML(fieldset, samples, times, title) {
 		time += sample_time
 		trial +='    <img src="' +  emptypath    + '" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;">'
 		trial +='  </div>'
-		trial +='  <div class="buttons">'
-		trial +='    <span><input type="button" class="next button" value="Sure same" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
-		trial +='    <span><input type="button" class="next button" value="Probably same" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
-		trial +='    <span><input type="button" class="next button" value="Probably different" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
-		trial +='    <span><input type="button" class="next button" value="Sure different" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='  <div class="buttons buttons_outer">'
+		trial +='    <div class="buttons buttons_inner1">'
+		trial +='      <span><input type="button" class="next button" value="Sure same" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='      <span><input type="button" class="next button" value="Probably same" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='    </div>'
+		trial +='    <div class="buttons buttons_inner2">'
+		trial +='      <span><input type="button" class="next button" value="Probably different" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='      <span><input type="button" class="next button" value="Sure different" style="animation: animateDissolve 0s ' + time + 'ms forwards; visibility: hidden;"></span>'
+		trial +='    </div>'
 		trial +='  </div>'
 		trial +='</div>'
 		
@@ -260,8 +264,8 @@ function nextSection() {
 
 	current_fs = $(this).parent()
 	// deal with nested buttons in trialarea
-	if (current_fs.parent().attr("class") == "buttons") {
-		current_fs = current_fs.parent().parent().parent()
+	if (current_fs.parent().parent().attr("class") == "buttons buttons_outer") {
+		current_fs = current_fs.parent().parent().parent().parent()
 	}
 	next_fs = current_fs.next()
 	current_time = Number(new Date().getTime())

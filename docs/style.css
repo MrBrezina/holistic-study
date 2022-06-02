@@ -5,8 +5,9 @@ html, body {
 	line-height: 160%;
 	margin: 0;
 	padding: 0;
-	background: rgb(24, 24, 24);;
+	background: rgb(24, 24, 24);
 }
+
 /* BASICS */
 
 a {
@@ -30,7 +31,8 @@ p {
 h2 {
 	font-size: 150%;
 	color: #2C3E50;
-	margin-bottom: 3em;
+	margin-bottom: 2em;
+	line-height: 160%;
 }
 
 /* .trial h2 {
@@ -41,7 +43,7 @@ h3 {
 	font-size: 120%;
 	font-weight: bold;
 	color: #2C3E50;
-	margin: 1em 0;
+	margin: 3em 0 1em;
 }
 
 
@@ -68,13 +70,12 @@ ol.tight li {
 
 fieldset {
 	background: white;
-	border: 1px solid #555;
-	border-radius: 2px;
+	border-radius: 4px;
 	padding: 30px 40px;
-	box-sizing: border-box;
 	width: 80%;
 	max-width: 1000px;
 	margin: 0 auto;
+	box-sizing: border-box;
 	
 	/*stacking fieldsets above each other*/
 	position: relative;
@@ -104,12 +105,11 @@ fieldset:not(:first-of-type) {
 input, textarea, select {
 	display: block;
 	float: none;
-	padding: 10px 2px;
+	padding: .5em .5em .6em;
 	margin: .5em 0 1.5em;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+	border: 2px solid #000;
+	border-radius: 4px;
 	width: 100%;
-	box-sizing: border-box;
 	font-family: Lucida Grande, Lucida Sans Unicode, Lucida Sans, sans-serif;
 	color: #2C3E50;
 	font-size: 100%;
@@ -121,7 +121,7 @@ input.button {
 	display: block;
 	width: 50%;
 	min-width: 180px;
-	height: 50px;
+	height: 100px;
 	color: #fff;
 	background: rgb(24, 24, 24);
 	text-align: center;
@@ -129,12 +129,20 @@ input.button {
 	font-size: 90%;
 	border: none;
 	cursor: pointer;
-	padding: 10px 5px;
+	padding: .5em .5em .6em;
 	margin: 3em 0 2em;
-	border-radius: 2px;
+	border-radius: 4px;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	appearance: none;
+}
+
+input.button:hover {
+	background: rgb(64, 64, 64);
+}
+
+input.button:active {
+	background: #c00;
 }
 
 /* used in trial area */
@@ -142,46 +150,26 @@ input.button {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	align-items: center;
+	align-items: space-between;
+}
+
+.buttons_outer {
+	margin: 5em 0;
 }
 
 .buttons span {
 	display: block;
-	float: left;
-	width: 20%;
 	min-width: 180px;
-	height: 50px;
-	margin: 2em 0.6em;
+	height: auto;
+	margin: 0 .5em;
 	background: #ddd;
-	border: none;
-	border-radius: 2px;
+	border-radius: 4px;
 	padding: 0;
 }
 
 .buttons input.button {
-	display: block;
-	color: #fff;
-	background: rgb(24, 24, 24);
-	text-align: center;
-	font-weight: bold;
-	font-size: 90%;
-	width: 100%;
-	border: none;
-	cursor: pointer;
-	padding: 10px 5px;
 	margin: 0;
-	border-radius: 2px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-}
-
-.button:hover, .button:focus, .buttons input.button:hover {
-	background: rgb(53, 53, 53);
-}
-
-.button:active, .buttons input.button:active {
-	background: #c00;
+	width: 100%
 }
 
 .button.single {
@@ -203,7 +191,7 @@ div.trialarea {
 	left: 0;
 	width: 200px;
 	height: 200px;
-	margin: 40px auto 70px;
+	margin: 10em auto;
 }
 
 .sample img, .countdown {
@@ -212,7 +200,7 @@ div.trialarea {
 	left: 0;
 	width: 200px;
 	height: 200px;
-  border: 1px solid #ccc;
+  border: 2px solid #000;
 	z-index: 2;
 }
 
@@ -239,55 +227,6 @@ div.trialarea {
 	}
 }
 
-/* Responsive */
-
-@media only screen and (max-device-width: 1000px), only screen and (max-width: 1000px) {
-	#msform {
-		margin: 0 auto;
-	}
-	fieldset {
-		width: 100%;
-		padding: 20px;
-		margin: 0;
-	}
-
-	fieldset.text,
-	fieldset.validate {
-		padding-right: 40px;
-	}
-
-	.sample, .sample img, .countdown {
-		width: 300px;
-		height: 300px;
-	}
-
-	.countdown {
-		line-height: 295px;
-	}
-
-	.buttons {
-		padding: 0;
-	}
-	.buttons span {
-		height: 75px;
-		width: 20%;
-		min-width: 50px;
-		margin: 2em 0.2em;
-		border: 1px solid white;
-	}
-	input.button {
-		height: 75px;
-		min-width: 50px;
-		padding: 1em;
-		margin: 3em 0 2em;
-		font-size: 110%;
-	}
-	.buttons input.button {
-		/* width: 100%; */
-		margin: 0;
-	}
-}
-
 
 /* progress bar */
 
@@ -298,7 +237,7 @@ h4 {
 	color: #ccc;
 	font-weight: normal;
 	font-size: 80%;
-	margin: 3em 0 0.5em;
+	margin: 5em 0 0.5em;
 	text-align: center;
 }
 
@@ -315,5 +254,70 @@ h4 {
 	background-color: #ddd;
 	width: 0;
 	height: 10px;
+}
+
+
+/* Responsivity */
+
+@media only screen and (max-device-width: 1000px), only screen and (max-width: 1000px) {
+	html, body {
+		color: #000;
+		font-family: Lucida Grande, Lucida Sans Unicode, Lucida Sans, sans-serif;
+		font-size: 28px;
+		line-height: 160%;
+		margin: 0;
+		padding: 0;
+		background: #fff;
+	}
+
+	#msform {
+		margin: 0 auto;
+	}
+	fieldset {
+		width: 100%;
+		padding: 1.5em;
+		margin: 0;
+		border: none;
+	}
+
+	fieldset.text,
+	fieldset.validate {
+		padding-right: 40px;
+	}
+
+	.sample, .sample img, .countdown {
+		width: 400px;
+		height: 400px;
+	}
+
+	.countdown {
+		line-height: 395px;
+	}
+
+	.buttons {
+		padding: 0;
+	}
+	.buttons_inner1 {
+		flex-direction: column;
+		width: 100%;
+	}
+	.buttons_inner2 {
+		flex-direction: column-reverse;
+		width: 100%;
+	}
+	.buttons span {
+		width: 90%;
+		height: 200px;
+		border: 3px solid #fff;
+	}
+	input.button {
+		height: 200px;
+		padding: 1.2em 0.5em 1.5em;
+		font-size: 90%;
+	}
+	.buttons input.button {
+		/* width: 100%; */
+		margin: 0;
+	}
 }
 

@@ -28,7 +28,7 @@ p {
 }
 
 h2 {
-	font-size: 120%;
+	font-size: 130%;
 	color: #2C3E50;
 	margin-bottom: 3em;
 }
@@ -38,11 +38,10 @@ h2 {
 } */
 
 h3 {
-	font-size: 110%;
+	font-size: 120%;
 	font-weight: bold;
 	color: #2C3E50;
 	margin: 1em 0;
-	text-decoration: underline;
 }
 
 
@@ -271,7 +270,6 @@ div.trialarea {
 	}
 	.buttons span {
 		height: 75px;
-		font-size: 80%;
 		width: 20%;
 		min-width: 50px;
 		margin: 2em 0.2em;

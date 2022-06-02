@@ -191,7 +191,7 @@ div.trialarea {
 	left: 0;
 	width: 200px;
 	height: 200px;
-	margin: 10em auto;
+	margin: 7em auto;
 }
 
 .sample img, .countdown {
@@ -307,11 +307,11 @@ h4 {
 	}
 	.buttons span {
 		width: 95%;
-		height: 200px;
+		height: 150px;
 		border: 3px solid #fff;
 	}
 	input.button {
-		height: 200px;
+		height: 150px;
 		padding: 1.2em 0.5em 1.5em;
 	}
 	.buttons input.button {

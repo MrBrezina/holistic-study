@@ -28,7 +28,7 @@ p {
 }
 
 h2 {
-	font-size: 130%;
+	font-size: 150%;
 	color: #2C3E50;
 	margin-bottom: 3em;
 }
@@ -280,6 +280,7 @@ div.trialarea {
 		min-width: 50px;
 		padding: 1em;
 		margin: 3em 0 2em;
+		font-size: 110%;
 	}
 	.buttons input.button {
 		/* width: 100%; */

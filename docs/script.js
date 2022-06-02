@@ -44,15 +44,22 @@ function getIndexes(count, total) {
 // get all combinations for all letters
 function getAllLetterCombos(letters) {
 	// combinations of samples we use
-	combos = [
-		["AA", "AA"],
-		["AB", "AB"],
-		["AB", "AC"],
-		["AB", "CD"],
-		["AA", "BB"],
-		["AB", "CB"]
-	]
-	// harder set?
+
+	// original
+	// top: 0-difference: 3, 1-difference: 1, 2-difference: 2
+	// bottom: 0-difference: 3, 1-difference: 2, 2-difference: 1
+	// combos = [
+	// 	["AA", "AA"],
+	// 	["AB", "AB"],
+	// 	["AB", "AC"],
+	// 	["AB", "CD"],
+	// 	["AA", "BB"],
+	// 	["AB", "CB"]
+	// ]
+
+	// current
+	// top: 0-difference: 3, 1-difference: 2, 2-difference: 1
+	// bottom: 0-difference: 3, 1-difference: 1, 2-difference: 2, 3-difference: 1
 	combos = [
 		["AA", "AA"],
 		["AD", "AD"],
@@ -89,6 +96,7 @@ function evaluatePair(first_letter, second_letter) {
 // practice_samples = getAllLetterCombos(["i", "d", "u"])  // 3 x 6 = 18 trials
 // shuffle(practice_samples)
 // we want practice_samples in fixed random order for all participants
+// needs to be regenerated if the above combos changes
 practice_samples = [
 	["d_DD", "d_AA"],
 	["d_AA", "d_AA"],
@@ -296,7 +304,10 @@ function nextSection() {
 		practice_times = practice_times.slice(2)
 		// interpolate the time depending on how many correct response were given
 		total = practice_times.length
-		time = 0.75 * (min_time + (max_time - min_time) * (total - total_correct) / total)
+		correction = 50
+		min_time2 = min_time - correction
+		max_time2 = max_time + correction
+		time = (min_time2 + (max_time2 - min_time2) * (total - total_correct) / total)
 		// round to 1 decimal
 		time = Number(time.toFixed(1))
 		// sanity check

@@ -263,7 +263,7 @@ h4 {
 	html, body {
 		color: #000;
 		font-family: Lucida Grande, Lucida Sans Unicode, Lucida Sans, sans-serif;
-		font-size: 28px;
+		font-size: 32px;
 		line-height: 160%;
 		margin: 0;
 		padding: 0;
@@ -306,7 +306,7 @@ h4 {
 		width: 100%;
 	}
 	.buttons span {
-		width: 90%;
+		width: 95%;
 		height: 200px;
 		border: 3px solid #fff;
 	}

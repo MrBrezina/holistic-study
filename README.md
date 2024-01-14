@@ -27,11 +27,16 @@ We described the study and some of the results in a conference presentation at t
 
 This repo includes:
 
+- the fonts used
 - the website we used to collect participants’ responses
 - the data/responses collected
 - Jupyter notebooks used to process the data and provide descriptive statistics
 
 We have used other software to analyze the data.
+
+### Font
+
+The Holicissimo fonts used to create the samples.
 
 ### Website
 

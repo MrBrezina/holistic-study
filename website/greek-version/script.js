@@ -45,19 +45,6 @@ function getIndexes(count, total) {
 function getAllLetterCombos(letters) {
 	// combinations of samples we use
 
-	// original
-	// top: 0-difference: 3, 1-difference: 1, 2-difference: 2
-	// bottom: 0-difference: 3, 1-difference: 2, 2-difference: 1
-	// combos = [
-	// 	["AA", "AA"],
-	// 	["AB", "AB"],
-	// 	["AB", "AC"],
-	// 	["AB", "CD"],
-	// 	["AA", "BB"],
-	// 	["AB", "CB"]
-	// ]
-
-	// current
 	// top: 0-difference: 3, 1-difference: 2, 2-difference: 1
 	// bottom: 0-difference: 3, 1-difference: 1, 2-difference: 2, 3-difference: 1
 	combos = [

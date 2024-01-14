@@ -1,8 +1,5 @@
 # Study of holistic component in letter perception
 
-
-# Study of holistic component in letter perception
-
 Designed and conducted by: David Březina and Mary Dyson
 
 This repo contains materials for a study we have conducted in the first half of 2022 to address the question whether people can selectively attend to the top halves of letters and ignore the bottom halves
@@ -12,7 +9,7 @@ This repo contains materials for a study we have conducted in the first half of 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].
 
-The fonts are available under a [proprietary licence of Rosetta Type Foundry)(https://rosettatype.com/licence). If you wish to use them, request express permission from Rosetta via email.
+The fonts are available under a [proprietary licence of Rosetta Type Foundry](https://rosettatype.com/licence). If you wish to use them, request express permission from Rosetta via email.
 
 [cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
 [cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg

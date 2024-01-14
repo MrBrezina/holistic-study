@@ -49,7 +49,7 @@ We tried to obtain results from Greek participants (participants whose L1 is Gre
 
 The “raw“ data collected from the website (via GetForm) before any processing is saved in the `data/raw-data.csv` file. The processed data is stored in `data/serial-data.csv` and `data/aggregated-data.csv`. For description of the data format, see the [data-processing notebook](https://nbviewer.jupyter.org/github/MrBrezina/holistic-study/blob/master/notebooks/1%20Process%20raw%20data.ipynb).
 
-The data from Greek participants is saved in saved in the `data/raw-data_greek.csv` file.
+The data from Greek participants is saved in the `data/raw-data_greek.csv` file.
 
 ### Jupyter notebooks
 

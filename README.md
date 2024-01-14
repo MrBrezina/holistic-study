@@ -37,13 +37,13 @@ The Holicissimo fonts used to create the samples.
 
 ### Website
 
-The website was served using GitHub Pages directly from this repo. The code is saved in `website/`. You can preview it by visiting [https://mrbrezina.github.io/holistic-study/](https://mrbrezina.github.io/holistic-study/) (the responses will not get saved).
+The website was served using GitHub Pages directly from this repo. The code is saved in `docs/`. You can preview it by visiting [https://mrbrezina.github.io/holistic-study/](https://mrbrezina.github.io/holistic-study/) (the responses will not get saved).
 
 The website uses Javascript to navigate between and time inidividual steps of the study and request responses from participants. The responses from each participant were saved using a [GetForm](https://getform.io) service.
 
 The samples (letter shapes created by combining top and bottom halves of letters from a variable font) are generated using a Python script (see `samples/generate-samples.py`).
 
-We tried to obtain results from Greek participants (participants whose L1 is Greek), but collected only a small number of responses. The slightly modified version of the website is in `website/greek-version/`.
+We tried to obtain results from Greek participants (participants whose L1 is Greek), but collected only a small number of responses. The slightly modified version of the website is in `docs/greek-version/`.
 
 ### Data
 
